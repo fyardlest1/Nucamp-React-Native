@@ -4,8 +4,9 @@ import Directory from './DirectoryComponent';
 import CampsiteInfo from "./CampsiteInfoComponent";
 import About from './AboutComponent';
 import Contact from './ContactComponent';
-import { View, Platform } from "react-native";
+import { View, Platform, StyleSheet } from "react-native";
 import { createStackNavigator, createDrawerNavigator } from "react-navigation";
+import { Icon } from 'react-native-elements';
 
 const DirectoryNavigation = createStackNavigator(
     {
