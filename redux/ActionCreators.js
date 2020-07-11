@@ -1,5 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
+import { Rating } from "react-native-elements";
 
 export const fetchComments = () => (dispatch) => {
   return fetch(baseUrl + "comments")
@@ -33,6 +34,27 @@ export const commentsFailed = (errMess) => ({
 export const addComments = (comments) => ({
   type: ActionTypes.ADD_COMMENTS,
   payload: comments,
+});
+
+// Adding - Posting Comment
+export const postComment = (campsiteId, rating, author, text) => dispatch => {
+
+  const newComment = {
+    campsiteId,
+    rating,
+    author,
+    text
+  };
+  newComment.date = new Date().toISOString();
+
+  setTimeout(() => {
+      dispatch(addComment(newComment));
+  }, 2000);
+}
+
+export const addComment = (comment) => ({
+  type: ActionTypes.ADD_COMMENT,
+  payload: comment,
 });
 
 export const fetchCampsites = () => (dispatch) => {
