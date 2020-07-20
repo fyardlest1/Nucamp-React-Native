@@ -29,15 +29,19 @@ class Reservation extends Component {
     title: "Reserve Campsite",
   };
 
-  // The toggleModal module was deleted
+  // Deleted the toggleModal module 
+  //toggleModal() {
+  //      this.setState({ showModal: !this.state.showModal });
+  //  }
+
 
   handleReservation() {
     console.log(JSON.stringify(this.state));
     //this.toggleModal();
     Alert.alert(
       "Begin Search?",
-      `Number of Campers:  ${this.state.campers}
-      Hike-In? ${this.state.hikeIn}
+      `Number of Campers:  ${this.state.campers} \n
+      Hike-In? ${this.state.hikeIn} \n
       Date: ${this.state.date}`,
       [
         {
