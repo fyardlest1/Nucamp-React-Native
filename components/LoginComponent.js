@@ -151,6 +151,10 @@ class RegisterTab extends Component {
         const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
         const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
+        // const { uri } = await Camera.takePictureAsync();
+        // const asset = await MediaLibrary.createAssetAsync(uri);
+        // console.log(asset);
+
         if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
             const capturedImage = await ImagePicker.launchCameraAsync({
                 allowsEditing: true,
@@ -163,6 +167,24 @@ class RegisterTab extends Component {
         }
     }
 
+    // Add choosing from image gallery option
+    getImageFromGallery = async () => {
+        //const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+        const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+        if (/*cameraPermission.status === 'granted' &&*/ cameraRollPermission.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
+              allowsEditing: true,
+              aspect: [1, 1],
+            });
+            if (!capturedImage.cancelled) {
+                console.log(capturedImage);
+                this.processImage(capturedImage.uri);
+            }
+        }
+    }
+
+    // Resize a photo and convert it to PNG (processImage Module)
     processImage = async (imgUri) => {
         let processedImage = await ImageManipulator.manipulateAsync(
             imgUri,
@@ -200,6 +222,10 @@ class RegisterTab extends Component {
                         <Button
                             title='Camera'
                             onPress={this.getImageFromCamera}
+                        />
+                        <Button
+                            title='Gallery'
+                            onPress={this.getImageFromGallery}
                         />
                     </View>
                     <Input
